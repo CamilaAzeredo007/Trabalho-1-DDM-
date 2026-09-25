@@ -37,7 +37,7 @@ export default function Configuracoes() {
         <Button
           title="Testar configurações"
           onPress={mostrarMensagem}
-          color="#841584"
+          color="#9067b6"
         />
       </View>
 
@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
 
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#FFF0F5',
     alignItems: 'center',
     justifyContent: 'center',
     padding: 20,
@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
 
   areaBotao: {
     width: '100%',
-    marginBottom: 30,
+    marginBottom: 30
   },
 
   versao: {

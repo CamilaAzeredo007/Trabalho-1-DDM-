@@ -66,12 +66,16 @@ const styles = StyleSheet.create({
 
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#FFF0F5',
     padding: 20,
     paddingTop: 50,
   },
 
   titulo: {
+    backgroundColor: '#b99ed3',
+    borderRadius: 15,
+    marginTop: 25, 
+    padding: 15,
     fontSize: 26,
     fontWeight: 'bold',
     color: '#333',
@@ -95,7 +99,7 @@ const styles = StyleSheet.create({
   },
 
   caixa: {
-    backgroundColor: '#d8e4ed',
+    backgroundColor: '#9067b6',
     padding: 20,
     borderRadius: 15,
     marginTop: 10,
@@ -104,13 +108,13 @@ const styles = StyleSheet.create({
   caixaTitulo: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#333',
+    color: '#fff',
     marginBottom: 10,
   },
 
   lista: {
     fontSize: 15,
-    color: '#555',
+    color: '#fff',
     lineHeight: 25,
   },
 
