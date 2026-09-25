@@ -6,34 +6,43 @@ import {
   Image,
 } from 'react-native';
 
+import Ionicons from '@expo/vector-icons/Ionicons';
+
+import { COLORS, SPACING, RADIUS, FONT, SHADOW } from '../theme';
+
 export default function Perfil() {
   return (
     <View style={styles.container}>
 
-      <Text style={styles.titulo}>Perfil</Text>
-
-      <Image
-        source={require('../assets/eu.jpg')}
-        style={styles.perfil}
-      />
+      <View style={styles.avatarAnel}>
+        <Image
+          source={require('../assets/eu.jpg')}
+          style={styles.perfil}
+        />
+      </View>
 
       <Text style={styles.nome}>
         Camila Amaro de Azeredo
       </Text>
 
-      <Text style={styles.info}>
-        RA: 20241BG.INF_I0007
-      </Text>
+      <View style={styles.infoLinha}>
+        <Ionicons name="card-outline" size={15} color={COLORS.textTertiary} />
+        <Text style={styles.info}>RA: 20241BG.INF_I0007</Text>
+      </View>
 
-      <Text style={styles.info}>
-        Disciplina: Desenvolvimento de Aplicativos
-      </Text>
+      <View style={styles.infoLinha}>
+        <Ionicons name="book-outline" size={15} color={COLORS.textTertiary} />
+        <Text style={styles.info}>Disciplina: Desenvolvimento de Aplicativos</Text>
+      </View>
 
       <View style={styles.sobre}>
 
-        <Text style={styles.sobreTitulo}>
-          Sobre o aplicativo
-        </Text>
+        <View style={styles.sobreTituloLinha}>
+          <Ionicons name="game-controller-outline" size={18} color={COLORS.secondaryDark} />
+          <Text style={styles.sobreTitulo}>
+            Sobre o aplicativo
+          </Text>
+        </View>
 
         <Text style={styles.descricao}>
           Este aplicativo foi desenvolvido com o tema de
@@ -55,59 +64,78 @@ export default function Perfil() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    paddingTop: 50,
-    paddingHorizontal: 20,
+    backgroundColor: COLORS.background,
+    paddingTop: 24,
+    paddingHorizontal: SPACING.xl,
     alignItems: 'center',
   },
 
-  titulo: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#333',
-    marginBottom: 25,
+  avatarAnel: {
+    width: 138,
+    height: 138,
+    borderRadius: 69,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: SPACING.lg,
+    borderWidth: 3,
+    borderColor: COLORS.primarySoft,
+    backgroundColor: COLORS.surface,
+    ...SHADOW.medium,
   },
 
   perfil: {
-    width: 130,
-    height: 130,
-    borderRadius: 65,
-    marginBottom: 20,
+    width: 126,
+    height: 126,
+    borderRadius: 63,
   },
 
   nome: {
-    fontSize: 22,
-    fontWeight: 'bold',
-    color: '#222',
-    marginBottom: 8,
+    ...FONT.h2,
+    color: COLORS.textPrimary,
+    marginBottom: SPACING.md,
+    textAlign: 'center',
+  },
+
+  infoLinha: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: SPACING.sm,
   },
 
   info: {
-    fontSize: 15,
-    color: '#555',
-    marginBottom: 6,
+    ...FONT.caption,
+    color: COLORS.textSecondary,
+    marginLeft: 6,
     textAlign: 'center',
   },
 
   sobre: {
     width: '100%',
-    backgroundColor: '#d8e4ed',
-    borderRadius: 15,
-    padding: 20,
-    marginTop: 25,
+    backgroundColor: COLORS.secondary,
+    borderRadius: RADIUS.lg,
+    padding: SPACING.xl,
+    marginTop: SPACING.xl,
+    ...SHADOW.soft,
+  },
+
+  sobreTituloLinha: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: SPACING.md,
   },
 
   sobreTitulo: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: '#222',
-    marginBottom: 12,
+    ...FONT.h3,
+    color: COLORS.textPrimary,
+    marginLeft: 6,
     textAlign: 'center',
   },
 
   descricao: {
+    ...FONT.body,
     fontSize: 14,
-    color: '#444',
+    color: COLORS.textPrimary,
     lineHeight: 21,
     textAlign: 'justify',
   },

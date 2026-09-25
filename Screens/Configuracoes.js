@@ -4,9 +4,13 @@ import {
   StyleSheet,
   Text,
   View,
-  Button,
+  TouchableOpacity,
   Alert,
 } from 'react-native';
+
+import Ionicons from '@expo/vector-icons/Ionicons';
+
+import { COLORS, SPACING, RADIUS, FONT, SHADOW } from '../theme';
 
 export default function Configuracoes() {
 
@@ -20,9 +24,9 @@ export default function Configuracoes() {
   return (
     <View style={styles.container}>
 
-      <Text style={styles.titulo}>
-        Configurações
-      </Text>
+      <View style={styles.iconeBadge}>
+        <Ionicons name="settings-outline" size={34} color={COLORS.primaryDark} />
+      </View>
 
       <Text style={styles.texto}>
         Catálogo de Jogos
@@ -33,17 +37,20 @@ export default function Configuracoes() {
         informações sobre diferentes jogos.
       </Text>
 
-      <View style={styles.areaBotao}>
-        <Button
-          title="Testar configurações"
-          onPress={mostrarMensagem}
-          color="#9067b6"
-        />
-      </View>
+      <TouchableOpacity
+        style={styles.botao}
+        activeOpacity={0.85}
+        onPress={mostrarMensagem}
+      >
+        <Ionicons name="checkmark-circle-outline" size={18} color={COLORS.white} style={styles.botaoIcone} />
+        <Text style={styles.botaoTexto}>Testar configurações</Text>
+      </TouchableOpacity>
 
-      <Text style={styles.versao}>
-        Versão 1.0.0
-      </Text>
+      <View style={styles.versaoPill}>
+        <Text style={styles.versao}>
+          Versão 1.0.0
+        </Text>
+      </View>
 
       <StatusBar style="auto" />
 
@@ -55,41 +62,68 @@ const styles = StyleSheet.create({
 
   container: {
     flex: 1,
-    backgroundColor: '#FFF0F5',
+    backgroundColor: COLORS.background,
     alignItems: 'center',
     justifyContent: 'center',
-    padding: 20,
+    padding: SPACING.xl,
   },
 
-  titulo: {
-    fontSize: 28,
-    fontWeight: 'bold',
-    color: '#333',
-    marginBottom: 25,
+  iconeBadge: {
+    width: 72,
+    height: 72,
+    borderRadius: RADIUS.pill,
+    backgroundColor: COLORS.primarySoft,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: SPACING.lg,
   },
 
   texto: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: '#444',
-    marginBottom: 10,
+    ...FONT.h2,
+    color: COLORS.textPrimary,
+    marginBottom: SPACING.sm,
   },
 
   descricao: {
-    fontSize: 15,
-    color: '#666',
+    ...FONT.body,
+    color: COLORS.textTertiary,
     textAlign: 'center',
-    marginBottom: 25,
+    marginBottom: SPACING.xl,
+    maxWidth: 280,
   },
 
-  areaBotao: {
-    width: '100%',
-    marginBottom: 30
+  botao: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: COLORS.primary,
+    paddingVertical: SPACING.md,
+    paddingHorizontal: SPACING.xl,
+    borderRadius: RADIUS.pill,
+    marginBottom: SPACING.xxl,
+    ...SHADOW.soft,
+  },
+
+  botaoTexto: {
+    ...FONT.bodyBold,
+    color: COLORS.white,
+  },
+
+  botaoIcone: {
+    marginRight: 8,
+  },
+
+  versaoPill: {
+    paddingVertical: 6,
+    paddingHorizontal: SPACING.md,
+    borderRadius: RADIUS.pill,
+    backgroundColor: COLORS.surface,
+    ...SHADOW.soft,
   },
 
   versao: {
-    fontSize: 14,
-    color: '#888',
+    ...FONT.tiny,
+    color: COLORS.textTertiary,
   },
 
 });

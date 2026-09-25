@@ -6,6 +6,19 @@ import {
   View,
 } from 'react-native';
 
+import Ionicons from '@expo/vector-icons/Ionicons';
+
+import { COLORS, SPACING, RADIUS, FONT, SHADOW, getGenreStyle } from '../theme';
+
+const exemplos = [
+  { nome: 'Valorant', genero: 'FPS tático' },
+  { nome: 'Dead by Daylight', genero: 'Terror e sobrevivência' },
+  { nome: 'Stardew Valley', genero: 'Aventura' },
+  { nome: 'The Sims 4', genero: 'Simulação' },
+  { nome: 'House Flipper', genero: 'Simulação' },
+  { nome: 'Detroit: Become Human', genero: 'Aventura gráfica e drama interativo' },
+];
+
 export default function Sobre() {
 
   return (
@@ -45,14 +58,17 @@ export default function Sobre() {
           Exemplos de jogos
         </Text>
 
-        <Text style={styles.lista}>
-          • Valorant{'\n'}
-          • Dead by Daylight{'\n'}
-          • Stardew Valley{'\n'}
-          • The Sims 4{'\n'}
-          • House Flipper{'\n'}
-          • Detroit: Become Human
-        </Text>
+        <View style={styles.chips}>
+          {exemplos.map((jogo) => {
+            const estilo = getGenreStyle(jogo.genero);
+            return (
+              <View key={jogo.nome} style={[styles.chip, { backgroundColor: estilo.bg }]}>
+                <Ionicons name={estilo.icon} size={13} color={estilo.text} />
+                <Text style={[styles.chipTexto, { color: estilo.text }]}>{jogo.nome}</Text>
+              </View>
+            );
+          })}
+        </View>
 
       </View>
 
@@ -66,56 +82,67 @@ const styles = StyleSheet.create({
 
   container: {
     flex: 1,
-    backgroundColor: '#FFF0F5',
-    padding: 20,
-    paddingTop: 50,
+    backgroundColor: COLORS.background,
+    padding: SPACING.xl,
+    paddingTop: 24,
   },
 
   titulo: {
-    backgroundColor: '#b99ed3',
-    borderRadius: 15,
-    marginTop: 25, 
-    padding: 15,
-    fontSize: 26,
-    fontWeight: 'bold',
-    color: '#333',
+    ...FONT.h1,
+    backgroundColor: COLORS.primarySoft,
+    borderRadius: RADIUS.lg,
+    padding: SPACING.md,
+    color: COLORS.textPrimary,
     textAlign: 'center',
-    marginBottom: 25,
+    marginBottom: SPACING.xl,
   },
 
   subtitulo: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: '#444',
-    marginBottom: 15,
+    ...FONT.h2,
+    color: COLORS.textPrimary,
+    marginBottom: SPACING.md,
   },
 
   texto: {
-    fontSize: 15,
-    color: '#555',
+    ...FONT.body,
+    color: COLORS.textSecondary,
     lineHeight: 22,
-    marginBottom: 15,
+    marginBottom: SPACING.md,
     textAlign: 'justify',
   },
 
   caixa: {
-    backgroundColor: '#9067b6',
-    padding: 20,
-    borderRadius: 15,
-    marginTop: 10,
+    backgroundColor: COLORS.primary,
+    padding: SPACING.xl,
+    borderRadius: RADIUS.lg,
+    marginTop: SPACING.sm,
+    ...SHADOW.medium,
   },
 
   caixaTitulo: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: '#fff',
-    marginBottom: 10,
+    ...FONT.h3,
+    color: COLORS.white,
+    marginBottom: SPACING.md,
   },
 
-  lista: {
-    fontSize: 15,
-    color: '#fff',
-    lineHeight: 25,
+  chips: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+  },
+
+  chip: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: 6,
+    paddingHorizontal: SPACING.sm,
+    borderRadius: RADIUS.pill,
+    marginRight: SPACING.sm,
+    marginBottom: SPACING.sm,
+  },
+
+  chipTexto: {
+    ...FONT.tiny,
+    marginLeft: 4,
   },
 
 });

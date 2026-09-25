@@ -11,6 +11,9 @@ import {
   Alert,
 } from 'react-native';
 import * as Speech from 'expo-speech';
+import Ionicons from '@expo/vector-icons/Ionicons';
+
+import { COLORS, SPACING, RADIUS, FONT, SHADOW, getGenreStyle } from '../theme';
 
 const jogos = [
   {
@@ -107,21 +110,26 @@ export default function Lista() {
       <Image source={item.imagem} style={styles.listaImagem} />
 
       <View style={styles.listaDetalhes}>
-        <Text style={styles.textoForte}>
-          Nome:
-          <Text style={styles.textoNormal}> {item.nome}</Text>
-        </Text>
+        <Text style={styles.nomeJogo}>{item.nome}</Text>
 
-        <Text style={styles.textoForte}>
-          Ano:
-          <Text style={styles.textoNormal}> {item.ano}</Text>
-        </Text>
+        <View style={styles.linhaInfo}>
+          <Ionicons name="calendar-outline" size={13} color={COLORS.textTertiary} />
+          <Text style={styles.ano}>{item.ano}</Text>
+        </View>
 
-        <Text style={styles.textoForte}>
-          Gênero:
-          <Text style={styles.textoNormal}> {item.genero}</Text>
-        </Text>
+        <View style={[styles.badge, { backgroundColor: getGenreStyle(item.genero).bg }]}>
+          <Ionicons
+            name={getGenreStyle(item.genero).icon}
+            size={12}
+            color={getGenreStyle(item.genero).text}
+          />
+          <Text style={[styles.badgeTexto, { color: getGenreStyle(item.genero).text }]}>
+            {item.genero}
+          </Text>
+        </View>
       </View>
+
+      <Ionicons name="volume-high-outline" size={20} color={COLORS.textTertiary} />
     </TouchableOpacity>
   );
 
@@ -129,13 +137,19 @@ export default function Lista() {
     <View style={styles.container}>
       <StatusBar style="auto" />
 
-      <Text style={styles.titulo}>Catálogo de Jogos</Text>
+      <View style={styles.cabecalho}>
+        <Ionicons name="game-controller-outline" size={16} color={COLORS.primaryDark} />
+        <Text style={styles.subtitulo}>
+          {jogos.length} jogos · toque para ouvir a sinopse
+        </Text>
+      </View>
 
       <FlatList
         data={jogos}
         renderItem={criaItem}
         keyExtractor={(item) => item.id.toString()}
         showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.listaConteudo}
       />
     </View>
   );
@@ -144,49 +158,82 @@ export default function Lista() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    paddingTop: 50,
-    paddingHorizontal: 10,
+    backgroundColor: COLORS.background,
+    paddingTop: 20,
+    paddingHorizontal: SPACING.lg,
   },
 
-  titulo: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 20,
-    color: '#333',
-    textAlign: 'center',
+  cabecalho: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: SPACING.lg,
+  },
+
+  subtitulo: {
+    ...FONT.caption,
+    color: COLORS.textTertiary,
+    marginLeft: SPACING.xs,
+  },
+
+  listaConteudo: {
+    paddingBottom: SPACING.xxl,
   },
 
   listaItem: {
-    backgroundColor: '#d8e4ed',
-    marginBottom: 15,
-    padding: 15,
-    borderRadius: 15,
+    backgroundColor: COLORS.surface,
+    marginBottom: SPACING.md,
+    padding: SPACING.md,
+    borderRadius: RADIUS.lg,
     width: '100%',
     flexDirection: 'row',
     alignItems: 'center',
-    elevation: 3,
+    ...SHADOW.soft,
   },
 
   listaImagem: {
-    width: 60,
-    height: 90,
-    borderRadius: 8,
+    width: 56,
+    height: 84,
+    borderRadius: RADIUS.sm,
+    backgroundColor: COLORS.border,
   },
 
   listaDetalhes: {
-    marginLeft: 15,
+    marginLeft: SPACING.md,
     flex: 1,
+    marginRight: SPACING.sm,
   },
 
-  textoForte: {
-    fontWeight: 'bold',
-    fontSize: 14,
-    color: '#222',
+  nomeJogo: {
+    ...FONT.h3,
+    color: COLORS.textPrimary,
+    marginBottom: 4,
   },
 
-  textoNormal: {
-    fontWeight: 'normal',
-    color: '#444',
+  linhaInfo: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: SPACING.sm,
+  },
+
+  ano: {
+    ...FONT.caption,
+    color: COLORS.textTertiary,
+    marginLeft: 4,
+  },
+
+  badge: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    alignSelf: 'flex-start',
+    paddingVertical: 4,
+    paddingHorizontal: SPACING.sm,
+    borderRadius: RADIUS.pill,
+    maxWidth: '100%',
+  },
+
+  badgeTexto: {
+    ...FONT.tiny,
+    marginLeft: 4,
   },
 });
